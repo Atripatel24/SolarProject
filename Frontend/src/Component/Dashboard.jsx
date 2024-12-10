@@ -13,8 +13,8 @@ const Dashboard = ({isAuth}) => {
     <>
       <div className='dashboard' >
         <div className='button-container'>
-          <button className='btn blue-btn'>Add User</button>
-          <button className='btn green-btn'><a href='/Details' style={{textDecoration:'none',color:'white'}}>View Users</a></button>
+          <a href="/wcr" className='btns blue-btn' style={{textDecoration:'none', color:'white'}}>Add User</a>
+          <a href="/Details" className='btns green-btn' style={{textDecoration:'none', color:'white'}}>View User</a>
         </div>
       </div>
     </>

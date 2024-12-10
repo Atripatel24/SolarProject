@@ -15,21 +15,24 @@ ul,
 li {
     list-style-type: none;
 }
-.insideform H3{
+
+.insideform H3 {
     text-decoration: underline;
 }
-.next button{
+
+.next button {
     width: 200px;
-    height:70px;
+    height: 70px;
     background-color: grey;
     color: white;
 
     font-size: x-large;
 }
 
-.form-section h1{
+.form-section h1 {
     text-decoration: underline;
 }
+
 /* Sidebar Styling */
 .sidebar {
     width: 20%;
@@ -118,7 +121,7 @@ li {
 /* form */
 
 form,
-.detail{
+.detail {
     width: 80%;
     float: inline-end;
     display: flex;
@@ -284,6 +287,7 @@ span {
     width: 80%;
     float: inline-end;
 }
+
 .dash {
     display: flex;
     flex-wrap: wrap;
@@ -305,7 +309,8 @@ span {
     text-decoration: none;
 
 }
-.dash-a li:hover{
+
+.dash-a li:hover {
     color: #fff;
     background-color: #495057;
 }
@@ -453,9 +458,9 @@ span {
     flex-wrap: wrap;
 }
 
-.btn {
+.btns {
     /* margin-left: 30px; */
-    width: 45%;
+    width: 40%;
     height: 150px;
     padding: 20px;
     font-size: 30px;
@@ -495,7 +500,7 @@ span {
         align-items: center;
     }
 
-    .btn {
+    .btns {
         padding: 0.8rem 1.2rem;
         border: none;
         border-radius: 4px;
@@ -525,17 +530,19 @@ span {
 
 /* table details */
 
-.user-table{
-    border:1px solid;
+.user-table {
+    border: 1px solid;
     border-collapse: collapse;
     width: 90%;
     padding: 2px;
 
 }
-.user-table th{
+
+.user-table th {
     border: 1px solid grey;
 }
-.user-table td{
+
+.user-table td {
     border: 1px solid;
     text-align: center;
 }
@@ -544,22 +551,25 @@ span {
 model aggremennt */
 /* General Styles */
 
-h1, h3, h4 {
+h1,
+h3,
+h4 {
     text-align: center;
     color: #333;
 }
 
-h4.center, h3.center {
+h4.center,
+h3.center {
     text-align: center;
 }
 
 /* Agreement Container */
 .agreement-container {
     /* max-width: 1200px; */
-    margin:10px;
+    margin: 10px;
     /* padding: 20px; */
-    
-  
+
+
 }
 
 /* Text and Paragraph Styles */
@@ -569,12 +579,14 @@ p {
 }
 
 /* List Styling */
-ul, ol {
+ul,
+ol {
     margin: 20px 0;
     padding-left: 20px;
 }
 
-ul li, ol li {
+ul li,
+ol li {
     margin-bottom: 10px;
 }
 
@@ -585,12 +597,14 @@ section {
 
 /* Responsive Layout */
 @media only screen and (max-width: 768px) {
+
     /* Make text slightly smaller for mobile */
     h1 {
         font-size: 1.5em;
     }
 
-    h3, h4 {
+    h3,
+    h4 {
         font-size: 1.2em;
     }
 
@@ -603,7 +617,8 @@ section {
     }
 
     /* Center the lists and adjust margins */
-    ul, ol {
+    ul,
+    ol {
         padding-left: 15px;
     }
 
@@ -614,12 +629,14 @@ section {
 }
 
 @media only screen and (max-width: 480px) {
+
     /* Make text even smaller for very small screens */
     h1 {
         font-size: 1.2em;
     }
 
-    h3, h4 {
+    h3,
+    h4 {
         font-size: 1em;
     }
 
@@ -637,10 +654,10 @@ section {
     }
 
     /* For smaller screens, reduce spacing on lists */
-    ul li, ol li {
+    ul li,
+    ol li {
         margin-bottom: 8px;
     }
 }
-/* ----------------------------------------------- */
 
-  
+/* ----------------------------------------------- */

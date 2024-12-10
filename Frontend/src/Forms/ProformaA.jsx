@@ -20,7 +20,7 @@ const ProformaA = () => {
 
     useEffect(() => {
 
-        if (!localUser) {
+        if (!localUser && user.mobile) {
             Swal.fire({
                 title: "Error!",
                 text: 'Please fill up first WCR form',
