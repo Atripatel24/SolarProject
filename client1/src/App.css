@@ -1,10 +1,13 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
+
 
 /* General Styles */
 body {
+   
     /* font-family: 'Montserrat', sans-serif; */
     /* background-color: #f4f4f4; */
     margin: 0;
@@ -23,7 +26,7 @@ li {
 .next button {
     width: 200px;
     height: 70px;
-    background-color: grey;
+    background-color:#0295b6;
     color: white;
 
     font-size: x-large;
@@ -34,60 +37,173 @@ li {
 }
 
 /* Sidebar Styling */
-.sidebar {
-    width: 20%;
-    /* float: left; */
-    background-color: #0295B6;
-    height: 100%;
-    position: fixed;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
+/* Sidebar Container */
+/* Logo Section with Highlighted Background */
 .sidebar .logo {
     text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #495057;
-}
-
-.sidebar .logo img {
-    width: 50px;
-    height: auto;
-}
-
-.sidebar .sidebar-wrapper {
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #FFDD57, #FFA000); /* Gradient background */
     padding: 20px 0;
+    border-bottom: 2px solid #4DC9E1;
+    border-radius: 0 0 10px 10px; /* Rounded edges at the bottom */
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
+/* Logo Image Styling */
+.sidebar .logo img {
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); /* Subtle shadow */
+}
+
+/* Logo Hover Effect */
+.sidebar .logo img:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    filter: brightness(1.2);
+}
+
+/* Sidebar Styling */
+.sidebar {
+
+    background: linear-gradient(to bottom, #0295B6, #016B8A); /* Gradient background */
+    height: 100vh;
+    position: fixed;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Links */
 .sidebar .nav {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.sidebar .nav li {
-    margin-bottom: 10px;
+    width: 100%;
 }
 
 .sidebar .nav a {
-    font-size: 20px;
-    color:white;
+    font-size: 18px;
+    color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     transition: background 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
 }
 
-/* .sidebar .nav  a li  {
-    margin-right: 10px;
-    font-size: 18px;
-} */
-
-.nav li a.active,
 .sidebar .nav a:hover {
-    color: black;
-    /* background-color:#a5e8f7; */
+    background-color: rgba(255, 255, 255, 0.2); /* Highlight effect */
+    color: #FFDD57; /* Light yellow for emphasis */
+    box-shadow: 0 0 10px rgba(255, 221, 87, 0.5);
+    transform: translateX(5px);
 }
+
+/* Logout Button */
+.sidebar button {
+    width: 80%;
+    padding: 12px;
+    background: linear-gradient(to right, #FFDD57, #FFA000); /* Gradient background */
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.sidebar button:hover {
+    background-color: #FFA000; /* Darker yellow */
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 160, 0, 0.6);
+    transform: scale(1.05);
+}
+/* responsive sidebar */
+@media screen and (max-width: 1024px) {
+    /* Adjust sidebar width for tablets and smaller laptops */
+    .sidebar {
+        width: 25%; /* Adjusted width */
+        overflow-y: auto; /* Ensure content is scrollable if it overflows */
+        height: 100vh; /* Full viewport height to avoid collapsing */
+        display: flex; /* Retain flex layout */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center content horizontally */
+    }
+
+    /* Navigation links styling */
+    .sidebar .nav a {
+        font-size: 16px; /* Slightly smaller font for navigation links */
+        padding: 10px 15px; /* Reduced padding */
+    }
+
+    /* Button styling */
+    .sidebar button {
+        font-size: 14px; /* Smaller button text */
+        padding: 10px;
+        margin-top: auto; /* Push the button to the bottom of the sidebar */
+        margin-bottom: 20px; /* Maintain spacing from the bottom */
+        display: block; /* Ensure button is displayed */
+    }
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+    #root{
+        margin: 0;
+    }
+    /* Optimize for very small screens */
+    .sidebar .logo img {
+        width: 90px; /* Smaller logo */
+    }
+    .sidebar .nav a {
+        font-size: 12px;
+        padding: 6px 8px; /* Tighter padding */
+    }
+    .sidebar button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    /* Sidebar Adjustments */
+    .sidebar {
+        width: 20%; /* Adjust width for larger screens */
+        height: 100vh; /* Ensure full-height sidebar */
+        display: flex; /* Flexbox for layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center horizontally */
+        overflow-y: auto; /* Allow scrolling if content exceeds height */
+    }
+
+    /* Navigation links */
+    .sidebar .nav a {
+        font-size: 18px; /* Adjusted font size for readability */
+        padding: 12px 20px; /* Space for clickable links */
+    }
+
+    /* Logout Button */
+    .sidebar button {
+        font-size: 16px; /* Visible and clear button text */
+        padding: 12px; /* Adequate padding for the button */
+        margin-top: auto; /* Push button to the bottom */
+        margin-bottom: 20px; /* Space from bottom */
+        display: block; /* Ensure button is displayed */
+        width: 80%; /* Make it full-width within the sidebar */
+    }
+}
+
 
 /* Main Panel Styling */
 .main-panel {
@@ -124,7 +240,7 @@ li {
 form,
 .detail {
     width: 80%;
-    float: inline-end;
+float: inline-end;
     display: flex;
     flex-direction: column;
 }
@@ -132,7 +248,7 @@ form,
 
 .insideform {
     padding: 20px;
-    width: 95%;
+    /* width: 95%; */
 }
 
 .form-section {
@@ -306,7 +422,7 @@ span {
 }
 
 .dash-board {
-    background-color:#7ed6ea;
+    background-color:white;
     color: black;
     list-style-type: none;
     text-align: center;
@@ -342,7 +458,7 @@ span {
         visibility: visible;
         margin: 1em;
         padding: 10px 12px;
-        background-color: #343a40;
+        background-color:#0295B6;
         color: white;
         border: none;
         border-radius: 50%;
@@ -369,7 +485,7 @@ span {
     .toggle-wrapper {
         padding: 10px;
         /* margin-top: 20px; */
-        background-color: #343a40;
+        background-color:#A4E8F7;
     }
 
     /* List styling inside dropdown */
@@ -377,7 +493,7 @@ span {
         list-style: none;
         padding: 0;
         margin: 0;
-        background-color: #686868;
+        background-color:#0295B6;
     }
 
     .toggleNav li {
@@ -390,18 +506,33 @@ span {
     }
 
     .toggleNav li:hover {
-        background-color: #343a40;
+        background-color: #A4E8F7;
+        color: black;
     }
 
     /* Anchor link styling */
     .toogleNav a {
-        color: #007BFF;
+
         text-decoration: none;
         font-size: 14px;
     }
 
     .toogleNav a:hover {
         text-decoration: underline;
+    }
+
+    .toggle button{
+        background: linear-gradient(to right, #FFDD57, #FFA000); /* Gradient background */
+        font-size: 14px;
+        width:100%;
+   
+        
+    }
+    .toggle button:hover{
+        background-color: #A4E8F7;
+        color: black;
+ 
+
     }
 
     /* dashboard */
@@ -442,8 +573,8 @@ span {
 .button-container {
     display: flex;
     margin: 50px;
-    justify-content: space-between;
-    /* gap: 1rem; */
+    justify-content: space-around;
+gap:30px;
     /* flex-wrap: wrap; */
 }
 
@@ -478,8 +609,11 @@ span {
     opacity: 0.9;
 }
 
-/* Responsive styling */
-@media (max-width: 768px) {
+/* Responsive styling 768px*/
+@media (max-width: 768px) { 
+    .sidebar{
+        width: 20%;
+    }
     .button-container {
         display: flex;
         justify-content: center;
@@ -717,6 +851,7 @@ section {
 .a4-page h3,
 .a4-page h4 {
     text-align: center;
+    margin-top: 40px;
 
 }
 
@@ -762,7 +897,7 @@ section {
 .a4-page .signature-section {
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 
 .a4-page .signature-section img {
@@ -919,7 +1054,7 @@ section {
 .a4-page-selfdeclar{
     width: 794px;
     font-size: 13px;
-    /* margin: 20px; */
+    margin: 20px;
     padding: 20px;
 }
 .a4-page-selfdeclar h3{
@@ -949,6 +1084,14 @@ section {
     page-break-inside: avoid;
     page-break-after: auto;
 }
+.a4-page-connectionagreement {
+    height: 1100px;
+}
+.a4-page-connectionagreement {
+    height: 2300px;
+    max-height: 2300px; /* To prevent overflow */
+    overflow: hidden;
+}
 
 
 .a4-page-agreement-container{
@@ -963,6 +1106,15 @@ section {
     page-break-after: avoid; /* Avoids unnecessary blank pages */
 }
 
+@media print {
+    .a4-page-connectionagreement{
+        width: 794px;
+        height: 1122px;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+}
+
 
 /* connectionagreement */
 /* 
@@ -972,7 +1124,7 @@ section {
     margin: auto;
  
 } */ 
-
+/* 
 .a4-page-selfdeclar .text-left{
     text-align: left;
     font-weight: 400;
@@ -985,12 +1137,35 @@ section {
 
     width: fit-content;
     margin-left: auto;
-}
-.a4-page-selfdeclar .inline-container{
+}*/
+.a4-page-selfdeclar .inline-container {
+    display: flex;
+    align-items:right;
+    justify-content: flex-start;
     margin-bottom: 0;
 }
-.a4-page-selfdeclar .inline-container label{
-    margin-left: 0;
+.a4-page-selfdeclar .inline-container label {
+    margin-left: 500px;
+    padding: 0;
+    float: none;
+}
+
+.a4-page-selfdeclar {
+    max-width: 100%;
+    overflow-x: auto; /* Ensures content scrolls if it overflows */
+    box-sizing: border-box; /* Ensures padding/margins don't overflow */
+}
+
+.a4-page-selfdeclar .signatureContent {
+    width: 100%; /* Ensures it takes up the entire width */
+    margin-left: 0; /* Align it properly */
+    text-align: right; /* Adjust alignment */
+}
+
+.a4-page-selfdeclar table {
+   
+    max-width: 100%; /* Prevent table from overflowing */
+    overflow-wrap: break-word; /* Handle long content */
 }
 
 .custom-success-button {

@@ -1,6 +1,6 @@
 import React from 'react'
-import signature from '../assets/signature.jpeg';
-import stamp from '../assets/stamp.jpeg';
+import stamp from "../assets/stamp.png"
+
 
 const ConModel = ({user}) => {
     return (
@@ -15,7 +15,7 @@ const ConModel = ({user}) => {
 
             <p><center>AND</center></p>
 
-            <p>The Distribution Licensee- Maharashtra State Electricity Distribution Co. Ltd; and having its Registered Office at {user.second_address} as second Party of this Agreement;</p>
+            <p>The Distribution Licensee- Maharashtra State Electricity Distribution Co. Ltd; and having its Registered Office at {user.discom_address} as second Party of this Agreement;</p>
 
             <p>Whereas, the Eligible Consumer has applied to the Licensee for approval of a Net Metering Arrangement under the provisions of the Maharashtra Electricity Regulatory Commission (Net Metering for Roof-top Solar Photo Voltaic Systems) Regulations, 2015 ('the Net Metering Regulations') and sought its connectivity to the Licensee's Distribution Network ;</p>
 
@@ -89,6 +89,8 @@ const ConModel = ({user}) => {
                 <p>
                     (a) By mutual consent; or
                 </p>
+                <br/>
+                <br/>
                 <p>
                     (b) By the Eligible Consumer, by giving 30 days' notice to the Licensee ;
                 </p>
@@ -162,7 +164,7 @@ const ConModel = ({user}) => {
                 </p>
             </div>
 
-       
+        
 
             <div>
                 <p>
@@ -171,7 +173,16 @@ const ConModel = ({user}) => {
             </div>
 
             <br />
-
+            <div style={{display:"flex",justifyContent:"space-around"}} >
+            <div>
+            <img src={`https://admin.samarthenergysolution.com${user.signature}`} alt="Consumer Signature" />
+                <label>Signature [consumer]</label>
+            </div>
+            <div>
+                <img src={stamp} alt="Stamp & Seal" style={{height:"100px",width:"200px"}} />
+                <label>Stamp [samarthenergysolution]</label>
+            </div>
+        </div>
             <div className='inline-container'>
                 <div style={{ width: '50%' }}>
                     <div className='inline-container'>
@@ -179,7 +190,7 @@ const ConModel = ({user}) => {
                       {user.name}
                     </div>
                     <center>For Eligible Consumer</center>
-                    <br /><br /><br />
+                    
                     <p>Witness 1(VENDOR):</p>
                 </div>
 

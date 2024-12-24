@@ -1,23 +1,33 @@
 import React , { useEffect , useState} from 'react'
 import Swal from 'sweetalert2'
-import { useLocation , useNavigate} from 'react-router-dom';
+import { useLocation , useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
+import stamp from "../assets/stamp.png"
 
 const ConnectionAggrement = () => {
     
     const [user, setUser] = useState({})
     let navigate = useNavigate();
+    let params = useParams();
 
     let localUser = localStorage.getItem("id");
     console.log('localid',localUser)
  
     const getWcr = async() => {
-        let res = await axios.get(`http://localhost:5000/api/user/${localUser}`)
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${localUser}`)
         console.log("data" , res.data)
         setUser(res.data.data)
     }
   
+    const editData = async() => {
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${params.id}`)
+        console.log("data" , res.data)
+        setUser(res.data.data)
+    }
+
     useEffect(() => {
+
+        if(!params.id){
 
         if(!localUser){
             Swal.fire({
@@ -33,7 +43,14 @@ const ConnectionAggrement = () => {
         }else{
             getWcr();
         }
+    }else{
+        editData();
+    }
     }, []);
+
+    useEffect(() => {
+    }, [user])
+    
 
 
     const userhandler = (e) => {
@@ -43,7 +60,7 @@ const ConnectionAggrement = () => {
     let submitHandler = async (e) =>{
         e.preventDefault();
 
-        let response = await axios.put(`http://localhost:5000/api/connection/${localUser}`,user)
+        let response = await axios.put(`https://admin.samarthenergysolution.com/api/connection/${localUser}`,user)
         
         if(response.data.success){
 
@@ -78,12 +95,12 @@ const ConnectionAggrement = () => {
                             <center>Net Metering Connection Agreement</center>
                         </h1>
                         <p>
-                            This Agreement is made and entered into at  {user.address}  on this {user.site_location} day of <input type="date" className='lines' required name='netmeter_date' onChange={userhandler} /> between the Eligible Consumer {user.name} (NAME) having premises at {user.site_location} (ADDRESS) and Consumer No. {user.consumer_number}  As the first Party,
+                            This Agreement is made and entered into at  {user.address}  on this {user.site_location} day of <input type="date" className='lines' required name='netmeter_date' value={user.netmeter_date} onChange={userhandler} /> between the Eligible Consumer {user.name} (NAME) having premises at {user.site_location} (ADDRESS) and Consumer No. {user.consumer_number}  As the first Party,
                      </p>
 
                         <p><b><center>AND</center></b></p>
 
-                        <p>The Distribution Licensee- Maharashtra State Electricity Distribution Co. Ltd; and having its Registered Office at <input type="text" className='lines' name='second_address' required onChange={userhandler} />as second Party of this Agreement;</p>
+                        <p>The Distribution Licensee- Maharashtra State Electricity Distribution Co. Ltd; and having its Registered Office at {user.disom_address} as second Party of this Agreement;</p>
 
                         <p>Whereas, the Eligible Consumer has applied to the Licensee for approval of a Net Metering Arrangement under the provisions of the Maharashtra Electricity Regulatory Commission (Net Metering for Roof-top Solar Photo Voltaic Systems) Regulations, 2015 ('the Net Metering Regulations') and sought its connectivity to the Licensee's Distribution Network ;</p>
 
@@ -234,7 +251,7 @@ const ConnectionAggrement = () => {
 
                         <div>
                             <p><b>
-                                In the witness where of Mayur Pramod Dhokale for and on behalf of Eligible Consumer and Shri.<input type="text" className='lines' name='shri' onChange={userhandler} required />for and on behalf of MSEDCL agree to this agreement.
+                                In the witness where of Mayur Pramod Dhokale for and on behalf of Eligible Consumer and Shri.<input type="text" className='lines' name='shri' value={user.shri} onChange={userhandler} required />for and on behalf of MSEDCL agree to this agreement.
                             </b></p>
                         </div>
 
@@ -248,7 +265,11 @@ const ConnectionAggrement = () => {
                                 </div>
                                 <center>For Eligible Consumer</center>
                                 <br /><br /><br />
-                                <p>Witness 1(VENDOR):</p>
+                                <div>
+                        <img src={stamp} alt="Stamp & Seal" style={{height:"200px",width:"300px"}} />
+                      
+                    </div>
+                                <p>Witness 1(Samarth energy solution):</p>
                             </div>
 
                             <div style={{ width: '50%' }}>
@@ -264,9 +285,15 @@ const ConnectionAggrement = () => {
                         </div>
 
                     </div>
-                    <div className='next'>
-                  <center><button>Next Page</button></center> 
-                  </div>
+                    {params.id ? 
+                        <div className='next'>
+                            <center><button>Update</button></center>
+                        </div>
+                              :
+                            <div className='next'>
+                              <center><button>Next Page</button></center>
+                            </div>
+                         }
             </div>
         </form>
     </>

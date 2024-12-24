@@ -1,24 +1,33 @@
 import React , { useState , useEffect} from 'react'
-import { useLocation , useNavigate } from 'react-router-dom';
+import { useLocation , useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import axios from 'axios';
+import stamp from '../assets/stamp.png'
 
 const ModelAgreement = () => {
 
     const [user, setUser] = useState({})
     let navigate = useNavigate();
+    let params = useParams();
 
    let localUser = localStorage.getItem("id");
    console.log('localid',localUser)
 
    const getWcr = async() => {
-       let res = await axios.get(`http://localhost:5000/api/user/${localUser}`)
+       let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${localUser}`)
        console.log("data" , res.data)
        setUser(res.data.data)
    }
  
+   const editData = async() => {
+    let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${params.id}`)
+    console.log("data" , res.data)
+    setUser(res.data.data)
+    }
+   
    useEffect(() => {
 
+    if(!params.id){
        if(!localUser){
            Swal.fire({
                title: "Error!",
@@ -33,7 +42,13 @@ const ModelAgreement = () => {
        }else{
            getWcr();
        }
+    }else{
+        editData();
+    }
    }, []);
+
+useEffect(()=>{
+},[user])
 
     const handleKeyDown = (e) => {
         if (
@@ -55,7 +70,7 @@ const ModelAgreement = () => {
     let submitHandler = async (e) =>{
         e.preventDefault();
 
-        let response = await axios.put(`http://localhost:5000/api/model/${localUser}`,user)
+        let response = await axios.put(`https://admin.samarthenergysolution.com/api/model/${localUser}`,user)
 
         if(response.data.success){
 
@@ -147,13 +162,13 @@ const ModelAgreement = () => {
                             <h3><b>2.</b> RTS System</h3>
                             <ul>
                                 <li><b>2.1.</b>Total capacity of the RTS System will be minimum
-                                    {user.num_modules * user.wattage_per_module} kWp.
+                                    {user.total_capacity} kWp.
                                 </li>
                                 <li><b>2.2.</b>Solar modules, inverters, and BoS will conform to minimum specifications and DCR requirements of
                                     MNRE.</li>
                                 <li>
-                                    <b>2.3.</b>  Solar modules of {user.module_make} make &model, {user.num_modules * user.wattage_per_module}Wp capacity each and
-                                    <input type="text" className="lines" name='efficiency' required onChange={userhandler} onKeyDown={handleKeyDown}/>% efficiency will be procured and installed by the Vendor
+                                    <b>2.3.</b>  Solar modules of {user.module_make} make &model, {user.total_capacity}Wp capacity each and
+                                    <input type="text" className="lines" name='efficiency' value={user.efficiency} required onChange={userhandler} />% efficiency will be procured and installed by the Vendor
                                 </li>
                                 <li>Solar inverter of {user.inverter_make} make & model,{user.total_capacity} kW rated output capacity will be
                                     procured and installed by the Mayur Pramod Dhokale</li>
@@ -170,14 +185,14 @@ const ModelAgreement = () => {
                             <h3><b>3.</b> Price and Payment Terms</h3>
                             <ol>
                                 <p>
-                                    <b>3.1.</b>   The cost of RTS System will be Rs. <input type="text" className="lines" name='rupees' required onChange={userhandler} onKeyDown={handleKeyDown}/>(to be decided
+                                    <b>3.1.</b>   The cost of RTS System will be Rs. <input type="text" className="lines" name='rupees' value={user.rupees} required onChange={userhandler} onKeyDown={handleKeyDown}/>(to be decided
                                     mutually).The Applicant shall pay the
                                     total cost to the vendor as under:
                                 </p>
                                 <ul>
-                                    <li>XX% as an advance on confirmation of the order.</li>
-                                    <li>XX% before dispatch of solar panels, inverters, and BoS items.</li>
-                                    <li>XX% after installation and commissioning.</li>
+                                    <li><input type='text' name= "advance" value={user.advance} style={{width:"5%"}}></input> % as an advance on confirmation of the order.</li>
+                                    <li><input type='text' name= "before" value={user.before} style={{width:"5%"}}></input>% before dispatch of solar panels, inverters, and BoS items.</li>
+                                    <li><input type='text' name= "after" value={user.after} style={{width:"5%"}}></input>% after installation and commissioning.</li>
                                 </ul>
                                 <p><b>3.2.</b> The order value and payment terms are fixed and will not be subject to any adjustment except as
                                     approved in writing by Vendor. The payment shall be made only through bankers’ cheque / NEFT / RTGS /
@@ -439,9 +454,27 @@ const ModelAgreement = () => {
                             </ol>
                         </section>
                     </div>
-                     <div className='next'>
-                  <center><button>Next Page</button></center> 
-                  </div>
+
+                    <div className='stampsign'>
+                        <div style={{ width: '50%', float: 'left' }}>
+                            <label htmlFor="imageUpload">Signature Consumer</label>
+                            <img src={user.signature} alt="Example" style={{ width: '200px', height: '150px' }} />
+                        </div>
+                        <div style={{ float: 'right', width: '50%' }}>
+                            <label>Stamp & Seal</label>
+                            <img src={stamp} alt="Example" style={{ width: '200px', height: '150px' }} />
+                        </div>
+                    </div>
+
+                    {params.id ? 
+                        <div className='next'>
+                            <center><button>Update</button></center>
+                        </div>
+                              :
+                            <div className='next'>
+                              <center><button>Next Page</button></center>
+                            </div>
+                         }
             </div>
         </form>
     </>

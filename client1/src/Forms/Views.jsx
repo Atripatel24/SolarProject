@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ProformaA from "./ProformaA";
 import Model from "./Model";
@@ -10,11 +10,11 @@ function Views() {
   const [user, setUser] = useState(null)
   const [currentViewPage, setCurrenttViewPage] = useState(null)
   const data = [
-    { name: "WCR" },
-    { name: "annexure1" },
-    { name: "selfdeclaration" },
-    { name: "connectionAgreement" },
-    { name: "modelagreement" },
+    { name: "WCR" , path:'/editwcr'},
+    { name: "annexure1" , path:'/editAnnexure1'},
+  {name:"selfdecleration",path:'/editSelfDecleration'},
+    { name: "connectionAgreement" , path:'/editConnectionAggrement' },
+    { name: "modelagreement" , path:'/editModelAgreement' },
   ];
   let params = useParams()
 
@@ -33,7 +33,7 @@ function Views() {
 
     },
     table: {
-      width: "100%",
+      width: "80%",
       borderCollapse: "collapse",
       margin: "0 auto",
     },
@@ -45,7 +45,7 @@ function Views() {
       border: "1px solid #ddd",
     },
     td: {
-      textAlign: "left",
+      textAlign: "center",
       padding: "12px 15px",
       border: "1px solid #ddd",
     },
@@ -88,11 +88,11 @@ useEffect(()=>{
   console.log('====================================');
 })
   let getData = async () => {
-    let res = await axios.get(`http://localhost:5000/api/user/${params.id}`)
+    let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${params.id}`)
     console.log("data", res.data)
 
     let { name,
-      sr_no,
+      
       consumer_number,
       site_location,
       category,
@@ -109,7 +109,11 @@ useEffect(()=>{
       inverter_make,
       rating,
       inverter_capacity,
+      discom_name,
+      discom_address,
       hpd,
+      advance,
+      before,after,
       manufacturing_year,
       earthings,
       lightning_arrester,
@@ -118,6 +122,7 @@ useEffect(()=>{
       aadharImage,
       mobile,
       email,
+      sr_pv_no,
       installation_date,
       efficiency,
       declaration_date,
@@ -133,6 +138,7 @@ useEffect(()=>{
     let magan = {
       wcr: {
         name,
+
         consumer_number,
         site_location,
         category,
@@ -153,6 +159,9 @@ useEffect(()=>{
         earthings,
         lightning_arrester,
         signature,
+        discom_address,
+        discom_name,
+       
         aadhar_number,
         aadharImage
       },
@@ -163,7 +172,7 @@ useEffect(()=>{
         email,
         site_location,
         sanctioned_capacity,
-        total_capacity,
+      
         installation_date,
         inverter_capacity,
         inverter_make,
@@ -179,8 +188,8 @@ useEffect(()=>{
         site_location,
         sanction_number,
         declaration_date,
-        discom,
-        sr_no,
+        discom_name,
+        sr_pv_no,
         wattage_per_module,
         num_modules,
         inverter_make,
@@ -195,6 +204,7 @@ useEffect(()=>{
         consumer_number,
         second_address,
         consumer_name,
+        discom_address,
         total_capacity,
         shri
       },
@@ -206,7 +216,11 @@ useEffect(()=>{
         module_make,
         inverter_make,
         efficiency,
-        rupees
+        signature,
+        rupees,
+        advance,
+        before,
+        after
 
       }
     }
@@ -248,6 +262,14 @@ useEffect(()=>{
   }
 
 
+  // edit page navigate
+
+  const navigate = useNavigate();
+
+  const editpage = (path,id) =>{
+    navigate(`${path}/${id}`)
+  }
+
   return (
     <div style={styles.container}>
       {
@@ -277,6 +299,12 @@ useEffect(()=>{
                     onClick={() => handleShowModel(item.name)}
                   >
                     View
+                  </button>
+                  <button
+                    style={{ ...styles.button, ...styles.downloadButton }}
+                    onClick={() => editpage(item.path , params.id)}
+                  >
+                    Edit
                   </button>
 
                 </td>

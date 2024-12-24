@@ -1,5 +1,5 @@
 import React from 'react';
-import stamp from '../assets/stamp.jpeg';
+import stamp from '../assets/stamp.png';
 
 const AnnexureModel = ({ user }) => {
     // Static values for missing data
@@ -135,7 +135,7 @@ const AnnexureModel = ({ user }) => {
 
                 <div className="signature-section" style={{ display: "flex", justifyContent: "space-between" }}>
                     <div>
-                        <img src={`http://localhost:5000${user.signature}`} style={{ width: '200px', height: '150px' }} alt="Consumer Signature" />
+                        <img src={`https://admin.samarthenergysolution.com${user.signature}`} style={{ width: '200px', height: '150px' }} alt="Consumer Signature" />
                         <label>Signature of the beneficiary</label>
                     </div>
                     <div>

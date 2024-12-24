@@ -248,8 +248,8 @@ const Model = ({ heading, user, setCurrenttViewPage }) => {
                     }
                 </style>`)
                 break;
-            case 'selfdeclaration':
-                setComponent(<SelfModel user={user.self_declaration} />)
+            case 'selfdecleration':
+                setComponent(<SelfModel user={user.selfdecleration} />)
                 setCss(` <style>
                 @media print {
                     /* Remove default headers and footers */
@@ -3267,7 +3267,7 @@ const Model = ({ heading, user, setCurrenttViewPage }) => {
             filename: `${user.wcr.name}-${heading}.pdf`,
             image: { type: 'jpeg', quality: 0.1  },
             html2canvas: {
-                scale: 2, // Quality of the image capture (higher scale = better quality)
+                scale: 1.3, // Quality of the image capture (higher scale = better quality)
                 letterRendering: true,
                 useCORS: true, // Allow CORS for images and content
             },

@@ -14,7 +14,7 @@ const Details = () => {
   console.log('userid', userId)
 
   const getAlldata = async () => {
-    let res = await axios.get("http://localhost:5000/api/details");
+    let res = await axios.get("https://admin.samarthenergysolution.com/api/details");
     console.log("response", res.data);
     setUser(res.data.data);
   };
@@ -27,7 +27,7 @@ const Details = () => {
 
 
 //   let getData = async () => {
-//     let res = await axios.get(`http://localhost:5000/api/user/${userId}`)
+//     let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${userId}`)
 //     console.log("data", res.data)
 //     setUser(res.data.data)
 // }
@@ -49,16 +49,18 @@ const Details = () => {
     pageNumbers.push(i);
   }
 
+  // delete user 
+
+  const deleteUser = async(id) => {
+      await axios.delete(`https://admin.samarthenergysolution.com/api/deleteuser/${id}`)
+       getAlldata();
+  }
+
   return (
     <div className="insideform">
       <div className="detail">
         <h1><center>CONSUMER DETAILS</center></h1> <br /> <br />
-        {user.length === 0 ? (
-          <h1>
-            Loading... <i className="fa-solid fa-spinner"></i>
-          </h1>
-        ) : (
-          <>
+        
             <table className="user-table">
               <thead>
                 <tr>
@@ -94,6 +96,20 @@ const Details = () => {
                         >
                           Details
                         </Link>
+                        
+                      </button>
+                      <button
+                        style={{
+                          marginLeft:"10px",
+                          backgroundColor: "#0295B6",
+                          border: "none",
+                          padding: "7px",
+                          cursor: "pointer",
+                          alignItems:"center"
+                        }}
+                        onClick={()=>deleteUser(item._id)}
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>
@@ -122,9 +138,7 @@ const Details = () => {
                 </button>
               ))}
             </div>
-          </>
-        )}
-      </div>
+          </div>
     </div>
   );
 };

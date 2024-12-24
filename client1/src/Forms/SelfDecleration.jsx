@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import stamp from '../assets/stamp.jpeg'
+import stamp from '../assets/stamp.png'
 import axios from 'axios'
 import { BarcodeScanner } from 'react-barcode-scanner'
 import "react-barcode-scanner/polyfill"
@@ -12,19 +12,28 @@ const SelfDecleration = () => {
 
     const [user, setUser] = useState({})
     let navigate = useNavigate();
+    let params = useParams();
+    console.log(params.id)
 
     let localUser = localStorage.getItem("id");
     console.log('localid', localUser)
 
+
     const getWcr = async () => {
-        let res = await axios.get(`http://localhost:5000/api/user/${localUser}`)
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${localUser}`)
+        console.log("data", res.data)
+        setUser(res.data.data)
+    }
+
+    const editWcr = async () => {
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${params.id}`)
         console.log("data", res.data)
         setUser(res.data.data)
     }
 
     useEffect(() => {
-
-        if (!localUser) {
+        if(!params.id){
+            if (!localUser) {
             Swal.fire({
                 title: "Error!",
                 text: 'Please fill up first WCR form',
@@ -35,10 +44,18 @@ const SelfDecleration = () => {
             }).then(() => {
                 navigate('/Wcr')
             });
-        } else {
+            } else {
             getWcr();
+            }
+        }else{
+            editWcr();
         }
     }, []);
+
+    useEffect(()=>{
+        console.log("user",user)
+    },[user])
+
     const [showScanner, setShowScanner] = useState(false);
     const [scannedCode, setScannedCode] = useState("");
 
@@ -56,7 +73,7 @@ const SelfDecleration = () => {
     let submitHandler = async (e) => {
         e.preventDefault();
 
-        let response = await axios.put(`http://localhost:5000/api/selfdeclar/${localUser}`, user)
+        let response = await axios.put(`https://admin.samarthenergysolution.com/api/selfdeclar/${localUser}`, user)
 
         if (response.data.success) {
 
@@ -87,7 +104,7 @@ return (
                     <h1 style={{ color: "black", textDecoration: "underline", marginBottom: "30px" }}>Undertaking/Self- Declaration for Domestic Content Requirement fulfillment</h1>
                     <center><h4>(On a plain Paper)</h4></center>
                     <p><b>
-                        1. This is to certify that M/S Mayur Pramod Dhokale has installed {user.total_capacity} KW [Capacity] Grid Connected Rooftop Solar Plant for {user.name} [Consumer Name] at {user.site_location} [Address] under application number {user.sanction_number} dated<input type="date" className='lines' required name='declaration_date' onChange={userhandler} />.[date of application] under <input type="text" name='discom' className='lines' required onChange={userhandler} />[DISCOM Name].
+                        1. This is to certify that M/S Mayur Pramod Dhokale has installed {user.total_capacity} KW [Capacity] Grid Connected Rooftop Solar Plant for {user.name} [Consumer Name] at {user.site_location} [Address] under application number {user.sanction_number} dated<input type="date" className='lines' required name='declaration_date' value={user.declaration_date} onChange={userhandler} />.[date of application] under {user.discom_name}.
                     </b></p>
 
                     <p><b>
@@ -107,43 +124,8 @@ return (
                             </tr>
                             <tr>
                                 <th>Sr No of PV Module :</th>
-                                <th><input type="text" name='pv_modules' onChange={userhandler} required /></th>
-                                <th> <div style={{ textAlign: "center", marginTop: "50px" }}>
-                                    <h1>Barcode Scanner App</h1>
-                                    <button
-                                        onClick={() => setShowScanner((prev) => !prev)}
-                                        style={{
-                                            padding: "10px 20px",
-                                            fontSize: "16px",
-                                            cursor: "pointer",
-                                            marginBottom: "20px",
-                                        }}
-                                    >
-                                        {showScanner ? "Stop Scanner" : "Start Scanner"}
-                                    </button>
-
-                                    {showScanner && (
-                                        <div
-                                            style={{
-                                                border: "1px solid black",
-                                                width: "80%",
-                                                height: "300px",
-                                                margin: "0 auto",
-                                            }}
-                                        >
-                                            <BarcodeScanner
-                                                onDetected={(result) => handleScan(result.text)} // Detect barcode and call handleScan
-                                            />
-                                        </div>
-                                    )}
-
-                                    {scannedCode && (
-                                        <p>
-                                            <strong>Scanned Code:</strong> {scannedCode}
-                                        </p>
-                                    )}
-                                </div>
-                                </th>
+                                <th><input type="text" name='sr_pv_no' value={user.sr_pv_no} onChange={userhandler} /></th>
+                               
                             </tr>
                             <tr>
                                 <th>PV Module Make :</th>
@@ -151,11 +133,11 @@ return (
                             </tr>
                             <tr>
                                 <th>Cell manufacturer’s name</th>
-                                <th><input type="text" name='cell_name' onChange={userhandler} required /></th>
+                                <th><input type="text" name='cell_name' value={user.cell_name} onChange={userhandler} required /></th>
                             </tr>
                             <tr>
                                 <th>Cell GST invoice No</th>
-                                <th><input type="text" name='gst_number' required onChange={userhandler} /></th>
+                                <th><input type="text" name='gst_number' value={user.gst_numbers} required onChange={userhandler} /></th>
                             </tr>
                         </tbody>
                     </table>
@@ -189,9 +171,15 @@ return (
 
                         </div>
                     </div>
+                   {params.id ? 
+                <div className='next'>
+                    <center><button>Update</button></center>
+                </div>
+                      :
                     <div className='next'>
-                        <center><button>Next Page</button></center>
+                      <center><button>Next Page</button></center>
                     </div>
+                 }
                 </div>
 
             </div>

@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REEEQUEST_FILENAME} !-f
+  RewriteCond %{REEEQUEST_FILENAME} !-d
+  RewriteCond %{REEEQUEST_FILENAME} !-l  
+  RewriteRule ./index.html[L]
+
+</IfModule>

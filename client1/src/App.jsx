@@ -83,7 +83,32 @@ element:<Signup getAuthDetails={getAuthDetails} setIsAuth={setIsAuth} />
           element:< Views/>
          }, 
 
+         // Edit Page
 
+         {
+          path:'/editwcr/:id',
+          element:<Wcr/>
+        },
+        {
+          path:'/editAnnexure1/:id',
+          element:<Annexure1/>
+        },
+        {
+          path:'/editProfomaA/:id',
+          element:< ProformaA />
+        },
+        {
+          path:'/editSelfDecleration/:id',
+          element:< SelfDecleration />
+        },
+        {
+          path:'/editConnectionAggrement/:id',
+          element:< ConnectionAggrement />
+        },
+        {
+          path:'/editModelAgreement/:id',
+          element:< ModelAgreement />
+        },
       ]
     }
   ])

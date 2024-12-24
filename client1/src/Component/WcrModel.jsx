@@ -1,6 +1,6 @@
 import React from 'react';
-import signature from '../assets/signature.jpeg';
-import stamp from '../assets/stamp.jpeg';
+import signature from '../assets/signature.png';
+import stamp from '../assets/stamp.png';
 
 const WcrModel = ({ user }) => {
     return (
@@ -122,6 +122,18 @@ const WcrModel = ({ user }) => {
                         <td>Lightening Arrester</td>
                         <td>{user.lightning_arrester}</td>
                     </tr>
+                    <tr>
+                        <td rowSpan={4}> 10.</td>
+                        <td colSpan={2}><center>disom</center></td>
+                    </tr>
+                    <tr>
+                        <td>Disom Name</td>
+                        <td>{user.discom_name}</td>
+                    </tr>
+                    <tr>
+                        <td>Discom Address</td>
+                        <td>{user.discom_address}</td>
+                    </tr>
                     </tbody>
                 </table>
                 <div className="paraWrapper">
@@ -149,7 +161,7 @@ const WcrModel = ({ user }) => {
                         <label>Signature [Vendor]</label>
                     </div>
                     <div>
-                        <img src={`http://localhost:5000${user.signature}`} alt="Consumer Signature" />
+                        <img src={`https://admin.samarthenergysolution.com${user.signature}`} alt="Consumer Signature" />
                         <label>Signature [Consumer]</label>
                     </div>
                 </div>
@@ -189,11 +201,6 @@ const WcrModel = ({ user }) => {
 
             
 
-            <img
-                src={`http://localhost:5000${user.aadharImage}`}
-                alt="aadharimage"
-                style={{margin:"auto",display:"block",objectPosition:"center",width: '500px', height: '250px',objectFit:"cover" }}
-            />
 
         </div>
     );

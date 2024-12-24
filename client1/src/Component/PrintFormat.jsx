@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import signature from '../assets/signature.jpeg';
-import stamp from '../assets/stamp.jpeg';
+import signature from '../assets/signature.png';
+import stamp from '../assets/stamp.png';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const PrintFormat = () => {
     };
 
     let getData = async () => {
-        let res = await axios.get(`http://localhost:5000/api/user/${userId}`)
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${userId}`)
         console.log("data", res.data)
         setUser(res.data.data)
     }
@@ -183,7 +183,7 @@ const PrintFormat = () => {
                         <label htmlFor="imageUpload">Signature [Vendor]</label>
 
                         <img
-                            src={`http://localhost:5000${user.signature}`}
+                            src={`https://admin.samarthenergysolution.com${user.signature}`}
                             alt="Signature"
                             style={{ marginleft:'300px',width: '200px', height: '150px' }}
                         />
@@ -227,7 +227,7 @@ const PrintFormat = () => {
                     <label htmlFor="aadharImage">Aadhar Card</label>
 
                     <img
-                        src={`http://localhost:5000${user.aadharImage}`}
+                        src={`https://admin.samarthenergysolution.com${user.aadharImage}`}
                         alt="aadharimage"
                         style={{ width: '400px', height: '250px' }}
                     />

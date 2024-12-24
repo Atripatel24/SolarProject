@@ -1,11 +1,14 @@
 import React from 'react'
+import stamp from "../assets/stamp.png"
+
+
 
 const ModelAgreeModel = ({ user }) => {
     return (
         <div>
             <div class="a4-page-agreement-container">
                 <h3 style={{ color: "black", textDecoration: "underline", margin: "10px" }}> <center>Model Agreement</center></h3>
-                <h4 className='center' style={{textDecoration:"underline    "}}>Between</h4>
+                <h4 className='center' style={{ textDecoration: "underline    " }}>Between</h4>
                 <p><b>
                     Applicant and the registered/empanelled Vendor for installation of rooftop solar system in
                     residential house of the Applicant under simplified procedure of Rooftop Solar Programme Ph-II.
@@ -66,7 +69,7 @@ const ModelAgreeModel = ({ user }) => {
                     <h3><b>2.</b> RTS System</h3>
                     <ul>
                         <li><b>2.1.</b>Total capacity of the RTS System will be minimum
-                            {user.num_modules * user.wattage_per_module} kWp.
+                            {user.total_capacity} kWp.
                         </li>
                         <li><b>2.2.</b>Solar modules, inverters, and BoS will conform to minimum specifications and DCR requirements of
                             MNRE.</li>
@@ -94,9 +97,9 @@ const ModelAgreeModel = ({ user }) => {
                             total cost to the vendor as under:
                         </p>
                         <ul>
-                            <li>XX% as an advance on confirmation of the order.</li>
-                            <li>XX% before dispatch of solar panels, inverters, and BoS items.</li>
-                            <li>XX% after installation and commissioning.</li>
+                            <li>{user.advance}% as an advance on confirmation of the order.</li>
+                            <li>{user.before}% before dispatch of solar panels, inverters, and BoS items.</li>
+                            <br />  <li>{user.after}% after installation and commissioning.</li>
                         </ul>
                         <p><b>3.2.</b> The order value and payment terms are fixed and will not be subject to any adjustment except as
                             approved in writing by Vendor. The payment shall be made only through bankers’ cheque / NEFT / RTGS /
@@ -357,10 +360,21 @@ const ModelAgreeModel = ({ user }) => {
                         </li>
                     </ul>
                 </section>
+
+                <div style={{display:"flex",justifyContent:"space-around"}} >
+                    <div>
+                    <img src={`https://admin.samarthenergysolution.com${user.signature}`} alt="Consumer Signature" style={{height:"100px",width:"200px"}} />
+                        <label>Signature [consumer]</label>
+                    </div>
+                    <div>
+                        <img src={stamp} alt="Stamp & Seal" style={{height:"100px",width:"200px"}} />
+                        <label>Stamp [samarthenergysolution]</label>
+                    </div>
+                </div>
                 <div className='inline-container'>
                     <div style={{ width: '50%' }}>
                         <div className='inline-container'>
-                            <label htmlFor="">Applicant:</label>
+                          
                             {user.name}
                         </div>
 
@@ -369,16 +383,16 @@ const ModelAgreeModel = ({ user }) => {
 
                     <div style={{ width: '50%' }}>
                         <div className='inline-container'>
-                            <label htmlFor="">Vendor:</label>
+                           
                             {user.shri}
                         </div>
 
-                       
+
                     </div>
                     <div>
-                    <p>Witness :</p>
-                    <p>1.</p>
-                    <p>2.</p>
+                        <p>Witness :</p>
+                        <p>1.</p>
+                        <p>2.</p>
                     </div>
                 </div>
 

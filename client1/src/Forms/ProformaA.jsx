@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import stamp from '../assets/stamp.jpeg'
-import signature from '../assets/signature.jpeg';
+import stamp from '../assets/stamp.png'
+import signature from '../assets/signature.png';
 
 
 const ProformaA = () => {
 
     const [user, setUser] = useState({})
     let navigate = useNavigate();
+    let params = useParams();
 
     let localUser = localStorage.getItem("id");
     console.log('localid', localUser)
 
     const getWcr = async () => {
-        let res = await axios.get(`http://localhost:5000/api/user/${localUser}`)
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${localUser}`)
+        console.log("data", res.data)
+        setUser(res.data.data)
+    }
+
+    const editData = async () => {
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${localUser}`)
         console.log("data", res.data)
         setUser(res.data.data)
     }
 
     useEffect(() => {
 
+        if(!params.id){
         if (!localUser) {
             Swal.fire({
                 title: "Error!",
@@ -37,9 +45,14 @@ const ProformaA = () => {
         } else {
             getWcr();
         }
+    }else{
+        editData();
+    }
     }, []);
 
-
+    useEffect(() => {
+    }, [user])
+    
 
 
     const userhandler = (e) => {
@@ -52,7 +65,7 @@ const ProformaA = () => {
     let submitHandler = async (e) => {
         e.preventDefault();
 
-        let response = await axios.put(`http://localhost:5000/api/proformaA/${localUser}`, user)
+        let response = await axios.put(`https://admin.samarthenergysolution.com/api/proformaA/${localUser}`, user)
   if (response.data.success) {
 
             Swal.fire({
@@ -60,7 +73,7 @@ const ProformaA = () => {
                 text: response.data.message,
                 icon: "success"
             }).then(() => {
-                navigate('/SelfDeclaration')
+                navigate('/SelfDecleration')
             })
 
         } else {
@@ -88,7 +101,7 @@ const ProformaA = () => {
                         </h4>
 
                         <p>
-                            <b>Certified that a Grid Connected SPV Power Plant of <input type="text" className='lines' value={user.total_capacity} disabled /> KWp capacity has been installed at the site <input type="text" className='lines' value={user.site_location} /> District<input type="text" className='lines' name='district' required onChange={userhandler} /> of  which has been installed by M/S Mayur Pramod Dhokale on <input type="date" value={user.installation_date} className='lines' disabled /> The system is as per BIS/MNRE specifications. The system has been checked for its performance and found in order for further commissioning.</b>
+                            <b>Certified that a Grid Connected SPV Power Plant of <input type="text" className='lines'   value={user.total_capacity} disabled /> KWp capacity has been installed at the site <input type="text" className='lines' name='site_loaction' value={user.site_location} /> District<input type="text" className='lines' name='district' onChange={userhandler} value={user.district} required  /> of  which has been installed by M/S Mayur Pramod Dhokale on <input type="date" value={user.installation_date} name='installation_date' className='lines' disabled /> The system is as per BIS/MNRE specifications. The system has been checked for its performance and found in order for further commissioning.</b>
                         </p>
 
                         <div>
@@ -112,9 +125,15 @@ const ProformaA = () => {
                         </div>
 
                     </div>
-                    <div className='next'>
-                        <center><button>Next Page</button></center>
-                    </div>
+                    {params.id ? 
+                        <div className='next'>
+                            <center><button>Update</button></center>
+                        </div>
+                              :
+                            <div className='next'>
+                              <center><button>Next Page</button></center>
+                            </div>
+                         }
                 </div>
             </form>
         </>

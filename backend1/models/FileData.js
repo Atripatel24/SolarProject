@@ -68,13 +68,18 @@ let userschema = mongoose.Schema({
     type: String,
 
   },
+  sr_pv_no:String,
+  advance:String,
+  before:String,
+  after:String,
   email: String,
   pv_modules:String,
   installation_date: String,
   district: String,
   connection_date: String,
   declaration_date: String,
-  discom: String,
+  discom_name: String,
+  discom_address: String ,
   cell_name: String,
   netmeter_date: String,
   second_address: String,
@@ -83,6 +88,9 @@ let userschema = mongoose.Schema({
   ruppes: String,
   aadharImage: String,
   signature: String,
+  advance:String,
+  before:String,
+  after:String
 }, { timestamps: true });
 
 let User = mongoose.model('User', userschema);

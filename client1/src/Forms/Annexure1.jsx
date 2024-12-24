@@ -1,23 +1,32 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 
 const Annexure1 = () => {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
+    const params = useParams();
 
     let localUser = localStorage.getItem("id");
     console.log('localid', localUser)
 
     const getWcr = async () => {
-        let res = await axios.get(`http://localhost:5000/api/user/${localUser}`)
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${localUser}`)
+        console.log("data", res.data)
+        setUser(res.data.data)
+    }
+
+    const editData = async () => {
+        let res = await axios.get(`https://admin.samarthenergysolution.com/api/user/${params.id}`)
         console.log("data", res.data)
         setUser(res.data.data)
     }
 
     useEffect(() => {
+
+        if(!params.id){
 
         if (!localUser) {
             Swal.fire({
@@ -34,8 +43,14 @@ const Annexure1 = () => {
             getWcr();
         }
 
+    }else{
+        editData();
+    }
+
     }, []);
 
+    useEffect(()=>{
+    },[user])
 
     const userhandler = (e) => {
         // console.log(e.target.value)
@@ -57,7 +72,9 @@ const Annexure1 = () => {
     let submitHandler = async (e) => {
         e.preventDefault();
 
-        let response = await axios.put(`http://localhost:5000/api/annexure/${localUser}`, user)
+        if(params.id){
+            
+        let response = await axios.put(`https://admin.samarthenergysolution.com/api/annexure/${params.id}`, user)
 
         if (response.data.success) {
 
@@ -66,7 +83,8 @@ const Annexure1 = () => {
                 text: response.data.message,
                 icon: "success"
             }).then(() => {
-                navigate('/ProfomaA')
+                    navigate(`/ProfomaA`)
+                
             })
 
         } else {
@@ -76,6 +94,30 @@ const Annexure1 = () => {
                 icon: "error"
             });
         }
+        }
+        else{
+
+        let response = await axios.put(`https://admin.samarthenergysolution.com/api/annexure/${localUser}`, user)
+
+        if (response.data.success) {
+
+            Swal.fire({
+                title: "Success!",
+                text: response.data.message,
+                icon: "success"
+            }).then(() => {
+                    navigate('/ProfomaA')
+                }
+            )
+
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: response.data.message,
+                icon: "error"
+            });
+        }
+         }
     }
 
     return (
@@ -119,14 +161,14 @@ const Annexure1 = () => {
                                 <td>3.</td>
                                 <td>Mobile Number</td>
                                 <td style={{ paddingLeft: '70px' }}>
-                                    <input type="text" name='mobile' onKeyDown={handleKeyDown} onChange={userhandler} />
+                                    <input type="text" name='mobile' value={user.mobile} onKeyDown={handleKeyDown} onChange={userhandler} />
                                 </td>
                             </tr>
                             <tr>
                                 <td>4.</td>
                                 <td>E-mail</td>
                                 <td style={{ paddingLeft: '70px' }}>
-                                    <input type="text" name='email' onKeyDown={handleKeyDown} onChange={userhandler} />
+                                    <input type="text" value={user.email} name='email'  onChange={userhandler} />
                                 </td>
                             </tr>
                             <tr>
@@ -194,7 +236,7 @@ const Annexure1 = () => {
                                 <td>14.</td>
                                 <td>Installation date</td>
                                 <td style={{ paddingLeft: '70px' }}>
-                                    <input type="date" onChange={userhandler} name='installation_date' />
+                                    <input type="date" onChange={userhandler} name='installation_date' value={user.installation_date} />
                                 </td>
                             </tr><tr>
                                 <td>15.</td>
