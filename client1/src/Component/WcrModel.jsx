@@ -3,6 +3,7 @@ import signature from '../assets/signature.png';
 import stamp from '../assets/stamp.png';
 
 const WcrModel = ({ user }) => {
+    console.log(user)
     return (
         <div className="a4-page">
             <h3>Work Completion Report for Solar Power Plant</h3>

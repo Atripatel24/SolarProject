@@ -170,6 +170,8 @@ let getData = async () => {
             else{
                 let response = await axios.post('https://admin.samarthenergysolution.com/api/users', formdata)
 
+                console.log(response)
+
             if (response.data.success) {
                 console.log('DatabaseUser', response.data.data._id)
 
