@@ -1,0 +1,1187 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/* General Styles */
+body {
+   
+    /* font-family: 'Montserrat', sans-serif; */
+    /* background-color: #f4f4f4; */
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+.insideform H3 {
+    font-family: Calibri;
+}
+
+.next button {
+    width: 200px;
+    height: 70px;
+    background-color:#0295b6;
+    color: white;
+
+    font-size: x-large;
+}
+
+.form-section h1 {
+    text-decoration: underline;
+}
+
+/* Sidebar Styling */
+/* Sidebar Container */
+/* Logo Section with Highlighted Background */
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #FFDD57, #FFA000); /* Gradient background */
+    padding: 20px 0;
+    border-bottom: 2px solid #4DC9E1;
+    border-radius: 0 0 10px 10px; /* Rounded edges at the bottom */
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Logo Image Styling */
+.sidebar .logo img {
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); /* Subtle shadow */
+}
+
+/* Logo Hover Effect */
+.sidebar .logo img:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    filter: brightness(1.2);
+}
+
+/* Sidebar Styling */
+.sidebar {
+
+    background: linear-gradient(to bottom, #0295B6, #016B8A); /* Gradient background */
+    height: 100vh;
+    position: fixed;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Links */
+.sidebar .nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar .nav a {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
+}
+
+.sidebar .nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Highlight effect */
+    color: #FFDD57; /* Light yellow for emphasis */
+    box-shadow: 0 0 10px rgba(255, 221, 87, 0.5);
+    transform: translateX(5px);
+}
+
+/* Logout Button */
+.sidebar button {
+    width: 80%;
+    padding: 12px;
+    background: linear-gradient(to right, #FFDD57, #FFA000); /* Gradient background */
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.sidebar button:hover {
+    background-color: #FFA000; /* Darker yellow */
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 160, 0, 0.6);
+    transform: scale(1.05);
+}
+/* responsive sidebar */
+@media screen and (max-width: 1024px) {
+    /* Adjust sidebar width for tablets and smaller laptops */
+    .sidebar {
+        width: 25%; /* Adjusted width */
+        overflow-y: auto; /* Ensure content is scrollable if it overflows */
+        height: 100vh; /* Full viewport height to avoid collapsing */
+        display: flex; /* Retain flex layout */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center content horizontally */
+    }
+
+    /* Navigation links styling */
+    .sidebar .nav a {
+        font-size: 16px; /* Slightly smaller font for navigation links */
+        padding: 10px 15px; /* Reduced padding */
+    }
+
+    /* Button styling */
+    .sidebar button {
+        font-size: 14px; /* Smaller button text */
+        padding: 10px;
+        margin-top: auto; /* Push the button to the bottom of the sidebar */
+        margin-bottom: 20px; /* Maintain spacing from the bottom */
+        display: block; /* Ensure button is displayed */
+    }
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+    #root{
+        margin: 0;
+    }
+    /* Optimize for very small screens */
+    .sidebar .logo img {
+        width: 90px; /* Smaller logo */
+    }
+    .sidebar .nav a {
+        font-size: 12px;
+        padding: 6px 8px; /* Tighter padding */
+    }
+    .sidebar button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    /* Sidebar Adjustments */
+    .sidebar {
+        width: 20%; /* Adjust width for larger screens */
+        height: 100vh; /* Ensure full-height sidebar */
+        display: flex; /* Flexbox for layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center horizontally */
+        overflow-y: auto; /* Allow scrolling if content exceeds height */
+    }
+
+    /* Navigation links */
+    .sidebar .nav a {
+        font-size: 18px; /* Adjusted font size for readability */
+        padding: 12px 20px; /* Space for clickable links */
+    }
+
+    /* Logout Button */
+    .sidebar button {
+        font-size: 16px; /* Visible and clear button text */
+        padding: 12px; /* Adequate padding for the button */
+        margin-top: auto; /* Push button to the bottom */
+        margin-bottom: 20px; /* Space from bottom */
+        display: block; /* Ensure button is displayed */
+        width: 80%; /* Make it full-width within the sidebar */
+    }
+}
+
+
+/* Main Panel Styling */
+.main-panel {
+    flex: 1;
+    margin-left: 250px;
+    background-color: #f8f9fa;
+    overflow: auto;
+    transition: margin-left 0.3s ease;
+}
+
+.navbar {
+    /* background-color: #343a40; */
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+.navbar .navbar-toggler {
+    background-color: #495057;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar .navbar-toggler .navbar-toggler-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+}
+
+/* form */
+
+form,
+.detail {
+    width: 80%;
+float: inline-end;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.insideform {
+    padding: 20px;
+    /* width: 95%; */
+}
+
+.form-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-section h3 {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-left: 30px;
+    display: block;
+    margin-bottom: 5px;
+    /* font-weight: bold; */
+}
+
+input,
+select,
+textarea {
+    margin-left: 30px;
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.form-footer {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+span {
+    color: red;
+}
+
+.lines {
+    outline: none;
+    width: max-content;
+    border: none;
+    background-color:white;
+    border-bottom: 2px dotted black;
+    margin-left: 0px;
+    font-weight: bold;
+    overflow: visible;
+}
+
+.inline-container {
+    display: grid;
+    /* margin-top: 50px; */
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 10px;
+    /* Space between elements */
+    margin-bottom: 15px;
+}
+
+/* Image preview container */
+.image-preview-container {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.image-preview-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Aadhar card */
+.aadhar-img {
+    width: "100px";
+    height: "100px";
+    object-fit: "cover";
+}
+
+/* Annexure-I table */
+.annexure>tr>td {
+    padding: 10px 10px;
+}
+
+.annexure>tr>th {
+    text-align: left;
+}
+
+.annexure>tr>td>input {
+    margin: 0;
+}
+
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgb(220, 220, 220);
+    margin: 10px 0;
+}
+
+
+@media print {
+    .page-break {
+        page-break-after: always;
+    }
+
+    .no-break {
+        page-break-inside: avoid;
+    }
+}
+
+/* .center {
+    text-align: center;
+} */
+
+/* Dashboard CSS */
+
+.dashboard {
+    width: 80%;
+    float: inline-end;
+}
+
+.dash {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dash-click {
+    margin: 30px;
+}
+
+.toggle {
+    visibility: collapse;
+}
+
+.toggle-btn {
+    visibility: hidden;
+}
+
+.dash-a {
+    text-decoration: none;
+
+}
+
+.dash-a li:hover {
+    color: black;
+    background-color: #a5e8f7;
+}
+
+.dash-board {
+    background-color:white;
+    color: black;
+    list-style-type: none;
+    text-align: center;
+    padding: 1em 1em;
+    margin: 5px 5px;
+    border-radius: 10px;
+}
+
+
+/* common css for dashboard, form, details */
+@media screen and (max-width: 500px) {
+    form {
+        width: 100%;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 80%;
+    }
+
+    /* navigation bar */
+    .sidebar {
+        transform: translateX(-200%);
+    }
+
+    .toggle {
+        visibility: visible;
+    }
+
+    /* Button to toggle the dropdown */
+    .toggle-btn {
+        visibility: visible;
+        margin: 1em;
+        padding: 10px 12px;
+        background-color:#0295B6;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    /* Dropdown container */
+    .toggle {
+        margin: 4em 0 0 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 80%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        z-index: 1000;
+    }
+
+    /* Dropdown wrapper for padding */
+    .toggle-wrapper {
+        padding: 10px;
+        /* margin-top: 20px; */
+        background-color:#A4E8F7;
+    }
+
+    /* List styling inside dropdown */
+    .toggleNav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color:#0295B6;
+    }
+
+    .toggleNav li {
+        padding: 5px;
+    }
+
+    .toggleNav a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .toggleNav li:hover {
+        background-color: #A4E8F7;
+        color: black;
+    }
+
+    /* Anchor link styling */
+    .toogleNav a {
+
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .toogleNav a:hover {
+        text-decoration: underline;
+    }
+
+    .toggle button{
+        background: linear-gradient(to right, #FFDD57, #FFA000); /* Gradient background */
+        font-size: 14px;
+        width:100%;
+   
+        
+    }
+    .toggle button:hover{
+        background-color: #A4E8F7;
+        color: black;
+ 
+
+    }
+
+    /* dashboard */
+    .dashboard {
+        width: 80%;
+        float: inline-end;
+
+
+    }
+
+    .insideform {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        width: 100%;
+
+    }
+
+    .dash {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .dash-click {
+        margin: 10px;
+    }
+
+    .stampsign {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+
+/* .dashboard css */
+.button-container {
+    display: flex;
+    margin: 50px;
+    justify-content: space-around;
+gap:30px;
+    /* flex-wrap: wrap; */
+}
+
+.btns {
+
+    width: 40%;
+    height: 150px;
+    padding-top: 70px;
+    font-size: 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    text-align: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Button colors */
+.blue-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.green-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Hover effects */
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Responsive styling 768px*/
+@media (max-width: 768px) { 
+    .sidebar{
+        width: 20%;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+        /* flex-direction: column; */
+        align-items: center;
+    }
+
+    .btns {
+        padding: 0.8rem 1.2rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        margin: 0 5%;
+        text-align: center;
+        width: 90%;
+        text-align: center;
+    }
+
+    /* Button colors */
+    .blue-btn {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .green-btn {
+        background-color: #28a745;
+        color: white;
+    }
+}
+
+
+/* table details */
+
+.user-table {
+
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 2px;
+
+}
+
+.user-table th {
+    padding: 7px;
+    border: 1px solid grey;
+}
+
+.user-table td {
+    padding: 7px;
+    border: 1px solid;
+    text-align: center;
+}
+ 
+/* 
+model aggremennt */
+/* General Styles */
+
+h1,
+h3,
+h4 {
+    /* text-align: center; */
+    color:black;
+}
+
+h4.center,
+h3.center {
+    text-align: center;
+}
+
+/* Agreement Container */
+.agreement-container {
+    /* max-width: 1200px; */
+    margin: 10px;
+    /* padding: 20px; */
+
+
+}
+
+/* Text and Paragraph Styles */
+p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+/* List Styling */
+ul,
+ol {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+ul li,
+ol li {
+    margin-bottom: 10px;
+}
+
+/* Section Styling */
+section {
+    margin-bottom: 20px;
+}
+
+/* Responsive Layout */
+@media only screen and (max-width: 768px) {
+
+    /* Make text slightly smaller for mobile */
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h3,
+    h4 {
+        font-size: 1.2em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .agreement-container {
+        padding: 15px;
+    }
+
+    /* Center the lists and adjust margins */
+    ul,
+    ol {
+        padding-left: 15px;
+    }
+
+    /* For headers that are centered */
+    .center {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+
+    /* Make text even smaller for very small screens */
+    h1 {
+        font-size: 1.2em;
+    }
+
+    h3,
+    h4 {
+        font-size: 1em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    .agreement-container {
+        padding: 10px;
+    }
+
+    /* Make the content more compact */
+    section {
+        margin-bottom: 15px;
+    }
+
+    /* For smaller screens, reduce spacing on lists */
+    ul li,
+    ol li {
+        margin-bottom: 8px;
+    }
+}
+
+/* ----------------------------------------------- */
+
+/* print-format */
+.printformat {
+    font-size: 13px;
+    font-family: Calibri;
+}
+
+
+/* model start  */
+.model {
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.model>div {
+    background-color: WHITE;
+    padding: 20px;
+
+    /* margin: 10px; */
+    height: 80vh;
+    overflow: auto;
+    width: 1000px;
+}
+
+.model .closeicon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    color: white;
+}
+
+/* model end  */
+
+
+
+/* wcr model css   */
+.a4-page {
+    width: 794px;
+
+    /* background-color: red !important; */
+    /* A4 width in pixels */
+    /* height: 1123px; */
+    /* A4 height in pixels */
+    margin: 0 auto;
+    padding: 0 50px;
+    /* Adjust as needed for inner spacing */
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    /* page-break-before: always; */
+}
+
+.a4-page h3,
+.a4-page h4 {
+    text-align: center;
+    margin-top: 40px;
+
+}
+
+.a4-page h4.left {
+    margin: 10px;
+    text-align: left;
+    color: black;
+}
+
+.a4-page p {
+    text-align: justify;
+    font-size: 13px
+}
+
+.page-a4-proforma {
+    font-size: 13px;
+}
+
+.page-a4-proforma p {
+    justify-content: center;
+
+}
+
+
+.a4-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.a4-page th,
+.a4-page td {
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    border: 1px solid #ddd;
+}
+
+.a4-page th {
+    background-color: #f2f2f2;
+}
+
+.a4-page .signature-section {
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 100px; */
+}
+
+.a4-page .signature-section img {
+    width: 200px;
+    height: 150px;
+}
+
+.a4-page .inline-container {
+    display: flex;
+    gap: 10px;
+}
+
+.a4-page .inline-container label {
+    font-weight: bold;
+}
+
+.a4-page th,
+.a4-page .th {
+    text-align: center;
+}
+
+.a4-page .para {
+    text-align: justify;
+    font-size: 13px;
+}
+
+.a4-page .paraWrapper {
+    margin-top: 20px;
+}
+/* .a4-page-agreement-container{
+    width: 794px;
+    margin: auto auto;
+ padding:100px;
+
+} */
+
+/* annexure1  */
+.a4-page-annexure1 {
+    width: 794px;
+    /* A4 width in mm */
+    /* height: 1123px; */
+    /* A4 height in mm */
+    /* background-color: red !important; */
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.a4-page-annexure1 .header {
+    text-align: center;
+    color: grey;
+    margin-bottom: 30px;
+}
+
+.a4-page-annexure1 h2 {
+    font-size: 18px;
+}
+
+.a4-page-annexure1 h3,
+.a4-page-annexure1 h5 {
+    font-size: 14px;
+}
+
+.a4-page-annexure1 table.annexure {
+    width: 100%;
+    margin-top: 20px;
+    border: none;
+
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.a4-page-annexure1 tr {
+    border: none;
+
+}
+
+.a4-page-annexure1 table.annexure th,
+.a4-page-annexure1 table.annexure td {
+    padding: 8px;
+    text-align: left;
+    border: none;
+}
+
+.a4-page-annexure1 table.annexure th {
+    /* background-color: #f2f2f2; */
+    font-weight: bold;
+}
+
+
+
+
+.a4-page-annexure1 .page-a4-proforma {
+    /* margin-top: 30px; */
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.a4-page-annexure1 .page-a4-proforma h3 {
+    font-size: 13px;
+    color: black;
+    text-align: center;
+    /* margin: 10px 0; */
+}
+
+.a4-page-annexure1 .page-a4-proforma p {
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.a4-page-annexure1 .signature-section {
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 40px; */
+}
+
+.a4-page-annexure1 .signature-section div {
+    width: 45%;
+    text-align: center;
+}
+
+.a4-page-annexure1 .signature-section img {
+    width: 200px;
+    height: 150px;
+}
+
+.a4-page-annexure1 .signature-section label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.a4-page-annexure1 h4 {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.a4-page-annexure1 b {
+    font-weight: bold;
+}
+
+/* annexure1  */
+
+
+/* self declar */
+
+
+.a4-page-selfdeclar{
+    width: 794px;
+    font-size: 13px;
+    margin: 20px;
+    padding: 20px;
+}
+.a4-page-selfdeclar h3{
+    text-align: left;
+}
+
+
+
+
+/* self declar */
+
+
+/* connectionagreement */
+.a4-page-connectionagreement {
+    font-size: 13px;
+   
+    width: 794px; /* Standard A4 page width */
+    margin: 40px auto 0 auto; /* Adds margins around the content */
+    padding: 40px; /* Adds inner spacing */
+    box-sizing: border-box; /* Includes padding in the width */
+    background-color: white; /* Ensures a clean background */
+    overflow: hidden; /* Prevents overflow causing extra blank pages */
+    page-break-after: avoid; /* Avoids unnecessary blank pages */
+}
+
+.a4-page-connectionagreement {
+    page-break-inside: avoid;
+    page-break-after: auto;
+}
+.a4-page-connectionagreement {
+    height: 1100px;
+}
+.a4-page-connectionagreement {
+    height: 2400px;
+    max-height: 2400px; /* To prevent overflow */
+    overflow: hidden;
+}
+
+
+.a4-page-agreement-container{
+    font-size: 13px;
+   
+    width: 794px; /* Standard A4 page width */
+    margin: 40px auto; /* Adds margins around the content */
+    padding: 40px; /* Adds inner spacing */
+    box-sizing: border-box; /* Includes padding in the width */
+    background-color: white; /* Ensures a clean background */
+    overflow: hidden; /* Prevents overflow causing extra blank pages */
+    page-break-after: avoid; /* Avoids unnecessary blank pages */
+}
+
+@media print {
+    .a4-page-connectionagreement{
+        width: 794px;
+        height: 1122px;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+
+/* connectionagreement */
+/* 
+.a4-page-agreement-container{
+    font-size: 13px;
+    width: 794px;
+    margin: auto;
+ 
+} */ 
+/* 
+.a4-page-selfdeclar .text-left{
+    text-align: left;
+    font-weight: 400;
+}
+.a4-page-selfdeclar table{
+    margin-left: 30px;
+}
+
+.a4-page-selfdeclar .signatureContent{
+
+    width: fit-content;
+    margin-left: auto;
+}*/
+.a4-page-selfdeclar .inline-container {
+    display: flex;
+    align-items:right;
+    justify-content: flex-start;
+    margin-bottom: 0;
+}
+.a4-page-selfdeclar .inline-container label {
+    margin-left: 500px;
+    padding: 0;
+    float: none;
+}
+
+.a4-page-selfdeclar {
+    max-width: 100%;
+    overflow-x: auto; /* Ensures content scrolls if it overflows */
+    box-sizing: border-box; /* Ensures padding/margins don't overflow */
+}
+
+.a4-page-selfdeclar .signatureContent {
+    width: 100%; /* Ensures it takes up the entire width */
+    margin-left: 0; /* Align it properly */
+    text-align: right; /* Adjust alignment */
+}
+
+.a4-page-selfdeclar table {
+   
+    max-width: 100%; /* Prevent table from overflowing */
+    overflow-wrap: break-word; /* Handle long content */
+}
+
+.custom-success-button {
+    background-color: green !important; /* Set your desired color */
+    color: white !important;           /* Text color */
+    border: none !important;           /* Remove borders */
+}
+
+.custom-error-button {
+    background-color:#0295B6 !important;  /* Set your desired color */
+    color: white !important;           /* Text color */
+    border: none !important;           /* Remove borders */
+}
+
+.hello{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
