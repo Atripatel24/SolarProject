@@ -6,20 +6,14 @@ let dotenv = require('dotenv')
 const app = express();
 let cors =require('cors')
 
-let path = require('path');
-const { access } = require('fs');
+let path = require('path')
 
 dotenv.config()
 
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({
-    origin: '*',
-    methods: ['GET,HEAD,PUT,PATCH,POST,DELETE'],    
-}))
-
-
+app.use(cors())
 
 app.use('/uploads',express.static(path.join(__dirname,'uploads')));
 

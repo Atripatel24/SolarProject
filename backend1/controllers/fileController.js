@@ -3,51 +3,32 @@ let path = require('path')
 
 let createUser = async (req, res) => {
     try {
-        const { 
-            name, 
-            consumer_number, 
-            site_location, 
-            num_modules, 
-            wattage_per_module, 
-            discom_name, 
-            discom_address, 
-            charge_controller, 
-            installed_capacity,
-            total_capacity, 
-            ...otherfields 
-        } = req.body;
+        
+        
+        const { name, consumer_number, site_location,num_modules,wattage_per_module,discom_name,discom_address,sr_pv_no ,...otherfields } = req.body;
+        console.log(req.body);
+        
+console.log(req.files);
 
-        console.log('Request Body:', req.body);
-        console.log('Uploaded Files:', req.files);
 
-        // Check if consumer number already exists
-        let exist = await User.findOne({ consumer_number });
-        if (exist) throw new Error('Consumer Number already exists!');
+       
+        let exist = await User.findOne({consumer_number})
+        if(exist) throw 'Consumer Number already exist !'
 
-        // Handle file paths safely
-        const aadharImagePath = req.files.aadharImage ? req.files.aadharImage[0].path : null;
-        const signaturePath = req.files.signature ? req.files.signature[0].path : null;
 
-        if (!aadharImagePath || !signaturePath) {
-            throw new Error('Aadhar image or signature is missing in the request.');
-        }
-
-        // Create a new user instance
         const newUser = new User({
             name,
             consumer_number,
             site_location,
             num_modules,
             wattage_per_module,
-            installed_capacity,
-            total_capacity,
-            charge_controller,
+            total_capacity ,
             discom_address,
             discom_name,
             ...otherfields,
-            sr_pv_no: null,
-            aadharImage: aadharImagePath,
-            signature: signaturePath
+            sr_pv_no:null,
+            aadharImage : req.files.aadharImage[0].path,
+            signature : req.files.signature[0].path
         });
 
         // Save the new user to the database
@@ -55,16 +36,16 @@ let createUser = async (req, res) => {
 
         // Send a success response
         res.status(201).json({
-            success: true,
+            success : true ,
             message: 'User created successfully!',
             data: newUser
         });
     } catch (error) {
-        console.error('Error:', error);
+        console.log(error);
         res.status(500).json({
-            success: false,
+            success : false ,
             message: 'Error creating user',
-            error: error.message || error
+            error: error.message
         });
     }
 };
@@ -114,9 +95,9 @@ let annexureHandler = async (req,res)=>{
 
     try{
 
-        const { mobile , email , installation_date,connection_date} = req.body
+        const { mobile , email , installation_date} = req.body
 
-        let result = await User.findByIdAndUpdate(id , { mobile , email , installation_date,connection_date})
+        let result = await User.findByIdAndUpdate(id , { mobile , email , installation_date})
 
         res.send({
             success:true ,
@@ -168,11 +149,9 @@ let selfHandler = async (req,res)=>{
 
     try{
 
-        console.log(req.body)
+        const {declaration_date,discom_name,pv_modules,sr_pv_no,total_capacity,cell_name,gst_number} = req.body
 
-        const {declaration_date,pv_modules,sr_pv_no,total_capacity,cell_name,gst_number} = req.body
-
-        let result = await User.findByIdAndUpdate(id , {declaration_date,pv_modules,sr_pv_no,cell_name,gst_number,total_capacity })
+        let result = await User.findByIdAndUpdate(id , {declaration_date,pv_modules,sr_pv_no,cell_name,gst_number,total_capacity,discom_name })
 
         res.send({
             success:true ,
@@ -223,9 +202,9 @@ let modelHandler = async (req,res)=>{
 
     try{
 
-        const {efficiency,rupees,advance,discom_address,before,after,signature} = req.body
+        const {efficiency,rupees,advance,before,after,signature} = req.body
 
-        let result = await User.findByIdAndUpdate(id , {efficiency,rupees,discom_address,advance,before,signature,after})
+        let result = await User.findByIdAndUpdate(id , {efficiency,rupees,advance,before,signature,after})
 
         res.send({
             success:true ,

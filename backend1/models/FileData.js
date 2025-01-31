@@ -9,7 +9,7 @@ let userschema = mongoose.Schema({
   consumer_number: {
     type:String,
     required: true,
-    minlength: [0, 'Consumer number must be at least 120characters long'],
+    minlength: [12, 'Consumer number must be at least 12 characters long'],
     maxlength: [12, 'Consumer number must not exceed 12  characters'],
   },
   site_location: {
@@ -23,18 +23,21 @@ let userschema = mongoose.Schema({
   sanction_number: {
     type: Number,
     required: true,
-    
+    minlength: [8, 'Sanctioned number must be at least 8 characters long'],
+    maxlength: [8, 'Sanctioned number must not exceed 8 characters'],
   },
   sanctioned_capacity: {
     type: String,
-
-    
+    required: true,
+    minlength: [4, 'Sanctioned Capacity must be at least 4 characters long'],
+    maxlength: [4, 'Sanctioned Capacity  must not exceed 4 characters'],
   },
   installed_capacity: {
     type: String,
-
-   
-  },gst_number:String,
+    required: true,
+    minlength: [4, 'Installed Capacity must be at least 4 characters long'],
+    maxlength: [4, 'Installed Capacity  must not exceed 4 characters'],
+  },
   module_make: String,
   almm_model: String,
   wattage_per_module: {
@@ -47,8 +50,9 @@ let userschema = mongoose.Schema({
   rating: String,
   inverter_capacity: {
     type: String,
-   
-   
+    required: true,
+    minlength: [4, 'Inverter Capacity must be at least 4 characters long'],
+    maxlength: [4, 'Inverter Capacity  must not exceed 4 characters'],
   },
   sr_no:String,
   hpd:String,
@@ -64,7 +68,6 @@ let userschema = mongoose.Schema({
     type: String,
 
   },
-  charge_controller:String,
   sr_pv_no:String,
   advance:String,
   before:String,
