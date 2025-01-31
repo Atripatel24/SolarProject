@@ -363,7 +363,7 @@ const ModelAgreeModel = ({ user }) => {
 
                 <div style={{display:"flex",justifyContent:"space-around"}} >
                     <div>
-                    <img src={`https://admin.samarthenergysolution.com${user.signature}`} style={{ width: '200px', height: '100px' }} alt="signature" />
+                    <img src={`https://admin.samarthenergysolution.com/${user.signature}`} style={{ width: '200px', height: '100px' }} alt="signature" />
                         <label>Signature [consumer]</label>
                     </div>
                     <div>

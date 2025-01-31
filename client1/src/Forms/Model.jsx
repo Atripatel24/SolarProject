@@ -10,11 +10,14 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import html2pdf from 'html2pdf.js';
 
+import { useRef } from 'react';
 
 const Model = ({ heading, user, setCurrenttViewPage }) => {
     const [component, setComponent] = useState()
     let [css, setCss] = useState('')
+
     useEffect(() => {
+        
         console.log('====================================');
         console.log(user,);
         console.log('====================================');
@@ -3321,7 +3324,7 @@ const Model = ({ heading, user, setCurrenttViewPage }) => {
                     {component}
                 </div>
                 <div class="modal-footer" style={{ margin: "50px", alignItems: "center", textAlign: "center" }}>
-                    <button id="downloadform" style={{ backgroundColor: "#0295B6", color: "white" }} onClick={() => generatePdf(user)} class="btn btn-info">DOWNLOAD FORM</button>
+                    <button id="downloadform" style={{ backgroundColor: "#0295B6", color: "white" }} onClick={()=>generatePdf(user)} class="btn btn-info">DOWNLOAD FORM</button>
                     <button id="printform" class="btn btn-info" style={{ backgroundColor: "#0295B6", color: "white", margin: "10px" }} onClick={printContent}>PRINT FORM</button>
                 </div>
 

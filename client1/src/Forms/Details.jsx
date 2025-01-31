@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
 const Details = () => {
@@ -9,15 +9,24 @@ const Details = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Define how many items to display per page
 
-  const data = useLocation();
-  const userId = data.state
-  console.log('userid', userId)
+  // const data = useLocation();
+  // const userId = data.state
+  // console.log('userid', userId)
 
   const getAlldata = async () => {
     let res = await axios.get("https://admin.samarthenergysolution.com/api/details");
     console.log("response", res.data);
     setUser(res.data.data);
   };
+
+  // const navigate = useNavigate
+  // useEffect(()=>{
+  //   let auth = JSON.parse(localStorage.getItem("auth"))
+  //   console.log(auth.isAuth)
+  //   if(auth !== true ){
+  //     navigate("/signup")
+  //   }
+  // })
 
   useEffect(() => {
     getAlldata();
