@@ -29,7 +29,7 @@ const Signup = ({ setIsAuth, getAuthDetails }) => {
                 text: "Invalid Login Credentials",
                 icon: "error",
                 customClass: {
-                    confirmButton: 'custom-error-button' 
+                    confirmButton: 'custom-error-button'
                 }
             });
         }
@@ -38,8 +38,8 @@ const Signup = ({ setIsAuth, getAuthDetails }) => {
     const handleDownload = () => {
         // Create a virtual link for downloading the app
         const link = document.createElement('a');
-        link.href = "https://example.com/path-to-your-app.zip"; // Replace with the actual file URL
-        link.download = "MyApp.zip"; // Replace with your desired file name
+        link.href = "http://localhost:5173/app-release.apk"; // Replace with the actual file URL
+        link.download = "SamarthEnergy.apk"; // Replace with your desired file name
         link.click();
     };
 
@@ -51,34 +51,34 @@ const Signup = ({ setIsAuth, getAuthDetails }) => {
                 </center>
                 <div style={styles.formGroup}>
                     <label htmlFor="name" style={styles.label}>Name</label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="Enter your name" 
-                        onChange={handleChange} 
-                        required 
-                        style={styles.input} 
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        onChange={handleChange}
+                        required
+                        style={styles.input}
                     />
                 </div>
                 <div style={styles.formGroup}>
                     <label htmlFor="password" style={styles.label}>Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Enter your password" 
-                        onChange={handleChange} 
-                        required 
-                        style={styles.input} 
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        onChange={handleChange}
+                        required
+                        style={styles.input}
                     />
                 </div>
                 <button type="submit" style={styles.button}>Submit</button>
-                <button 
-                    type="button" 
-                    className="download-btn" 
-                    id="downloadButton" 
-                    onClick={handleDownload} 
+                <button
+                    type="button"
+                    className="download-btn"
+                    id="downloadButton"
+                    onClick={handleDownload}
                     style={styles.button}>
                     Download App
                 </button>
